@@ -13,16 +13,29 @@ async function fetchRepoContents() {
         const data = await response.json();
         const folderList = document.getElementById('folder-list');
 
-        data.forEach(item => {
+        data.reports.forEach(report => {
             if (item.type === 'dir') {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
-                link.href = `${item.path}/index.html`;
+                link.href = `reports/${item.path}/index.html`;
+                link.textContent = item.name;
+                listItem.appendChild(link);
+                folderList.appendChild(listItem);
+            }
+        })
+        /*
+        data.forEach(item => {
+            console.log(`item.path: [${JSON.stringify(`ITEM => [${JSON.stringify()}]`)}]`)
+            if (item.type === 'dir') {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `reports/${item.path}/index.html`;
                 link.textContent = item.name;
                 listItem.appendChild(link);
                 folderList.appendChild(listItem);
             }
         });
+        */
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
