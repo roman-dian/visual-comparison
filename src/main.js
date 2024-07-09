@@ -1,18 +1,25 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
+import { app, BrowserWindow, ipcMain } from 'electron';
+import contextMenu from 'electron-context-menu';
+
+import * as path from 'path';
+
+ 
+contextMenu({
+	showSaveImageAs: true
+});
+
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 1480,
     height: 720,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.resolve('src/preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     },
   });
 
-  // Cargar Google
   win.loadURL('https://roman-dian.github.io/visual-comparison/');
 
   ipcMain.on('go-back', () => {
