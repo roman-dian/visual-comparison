@@ -6,7 +6,7 @@ import * as path from 'path';
  
 contextMenu({
 	showSaveImageAs: true
-});
+})
 
 
 function createWindow() {
